@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AglCodingTest.Services", "s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AglCodingTest.Models", "src\AglCodingTest.Models\AglCodingTest.Models.csproj", "{C7D5BBB5-482D-49F6-9E0E-9F33F95A64CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AglCodingTest.Models.Tests", "test\AglCodingTest.Models.Tests\AglCodingTest.Models.Tests.csproj", "{E8B18210-35FE-4DA5-8394-08C698AC8BE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,10 @@ Global
 		{C7D5BBB5-482D-49F6-9E0E-9F33F95A64CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7D5BBB5-482D-49F6-9E0E-9F33F95A64CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7D5BBB5-482D-49F6-9E0E-9F33F95A64CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8B18210-35FE-4DA5-8394-08C698AC8BE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8B18210-35FE-4DA5-8394-08C698AC8BE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8B18210-35FE-4DA5-8394-08C698AC8BE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8B18210-35FE-4DA5-8394-08C698AC8BE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{974E7B3F-80DE-486C-8968-27219D2F079F} = {74F77911-DFA1-428E-9C09-71334FD246A4}
 		{2D1B8FD2-F4F5-4354-80FB-569D3491D78B} = {74F77911-DFA1-428E-9C09-71334FD246A4}
 		{C7D5BBB5-482D-49F6-9E0E-9F33F95A64CD} = {74F77911-DFA1-428E-9C09-71334FD246A4}
+		{E8B18210-35FE-4DA5-8394-08C698AC8BE6} = {DFC84156-3B71-474C-A6AD-91D119C04EAF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {938129C8-CBE0-4346-B677-9B44A7D7A0D9}
