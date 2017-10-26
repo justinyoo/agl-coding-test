@@ -40,6 +40,9 @@ namespace AglCodingTest.Functions
 
             options.ThrowIfNullOrDefault();
 
+            var functionOptions = options as AglCodingTestHttpTriggerFunctionOptions;
+            functionOptions.ThrowIfNullOrDefault();
+
             // STEP #1: Load payload.
             var loadingServiceOptions = new AglPayloadLoadingServiceOptions();
 
@@ -53,7 +56,8 @@ namespace AglCodingTest.Functions
             // STEP #2: Process payload.
             var processingServiceOptions = new AglPayloadProcessingServiceOptions()
                                                {
-                                                   People = loadingServiceOptions.People
+                                                   People = loadingServiceOptions.People,
+                                                   PetType = functionOptions.PetType
                                                };
 
             await this._processingService.InvokeAsync(processingServiceOptions).ConfigureAwait(false);
