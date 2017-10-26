@@ -1,14 +1,12 @@
-﻿using System.Linq;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
 using AglCodingTest.Extensions;
-using AglCodingTest.Models;
+using AglCodingTest.Functions.FunctionOptions;
 using AglCodingTest.Services;
 using AglCodingTest.Services.ServiceOptions;
-using AglCodingTest.Settings;
 
 namespace AglCodingTest.Functions
 {
@@ -17,51 +15,61 @@ namespace AglCodingTest.Functions
     /// </summary>
     public class AglCodingTestHttpTriggerFunction : IAglCodingTestHttpTriggerFunction
     {
-        private readonly AppSettings _appSettings;
-        private readonly IAglPayloadLoadingService _service;
+        private readonly IAglPayloadLoadingService _loadingService;
+        private readonly IAglPayloadProcessingService _processingService;
 
         private bool _disposed;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AglCodingTestHttpTriggerFunction"/> class.
         /// </summary>
-        /// <param name="appSettings"><see cref="AppSettings"/> instance.</param>
-        /// <param name="service"><see cref="IAglPayloadLoadingService"/> instance.</param>
-        public AglCodingTestHttpTriggerFunction(AppSettings appSettings, IAglPayloadLoadingService service)
+        /// <param name="loadingService"><see cref="IAglPayloadLoadingService"/> instance.</param>
+        /// <param name="processingService"><see cref="IAglPayloadProcessingService"/> instance.</param>
+        public AglCodingTestHttpTriggerFunction(IAglPayloadLoadingService loadingService, IAglPayloadProcessingService processingService)
         {
-            this._appSettings = appSettings.ThrowIfNullOrDefault();
-            this._service = service.ThrowIfNullOrDefault();
+            this._loadingService = loadingService.ThrowIfNullOrDefault();
+            this._processingService = processingService.ThrowIfNullOrDefault();
         }
 
         /// <inheritdoc />
-        public async Task<object> InvokeAsync<TIn, TOptions>(TIn input, TOptions options)
-            where TOptions : ServiceOptionsBase
+        public async Task<object> InvokeAsync<TInput, TOptions>(TInput input, TOptions options = default(TOptions))
+            where TOptions : FunctionOptionsBase
         {
             var req = input as HttpRequestMessage;
             req.ThrowIfNullOrDefault();
 
             options.ThrowIfNullOrDefault();
 
-            var serviceOptions = options as AglPayloadLoadingServiceOptions;
-            serviceOptions.ThrowIfNullOrDefault();
+            // STEP #1: Load payload.
+            var loadingServiceOptions = new AglPayloadLoadingServiceOptions();
 
-            await this._service.InvokeAsync(serviceOptions).ConfigureAwait(false);
+            await this._loadingService.InvokeAsync(loadingServiceOptions).ConfigureAwait(false);
 
-            var catOwners = serviceOptions.People
-                                          .Where(p => p.Pets.Any(q => q.PetType == PetType.Cat))
-                                          .OrderBy(p => p.GenderType)
-                                          .Select(p => new { Gender = p.GenderType, Names = p.Pets.Where(q => q.PetType == PetType.Cat).OrderBy(q => q.Name).Select(q => q.Name) })
-                                          .Select(p => $"<h1>{p.Gender}</h1><ul>{string.Join(string.Empty, p.Names.Select(q => $"<li>{q}</li>"))}</ul>")
-                                          .ToList();
+            if (!loadingServiceOptions.IsInvoked)
+            {
+                return req.CreateErrorResponse(HttpStatusCode.InternalServerError, "Payload couldn't be loaded");
+            }
 
+            // STEP #2: Process payload.
+            var processingServiceOptions = new AglPayloadProcessingServiceOptions()
+                                               {
+                                                   People = loadingServiceOptions.People
+                                               };
+
+            await this._processingService.InvokeAsync(processingServiceOptions).ConfigureAwait(false);
+
+            if (!processingServiceOptions.IsInvoked)
+            {
+                return req.CreateErrorResponse(HttpStatusCode.InternalServerError, "Payload couldn't be processed");
+            }
+
+            // STEP #3: Create response.
             var html = new StringBuilder();
             html.AppendLine("<html><body>");
-            html.AppendLine(string.Join(string.Empty, catOwners));
+            html.AppendLine(string.Join(string.Empty, processingServiceOptions.Groups));
             html.AppendLine("</body></html>");
 
-            var res = req.CreateResponse(HttpStatusCode.OK, html.ToString(), "text/html");
-
-            return res;
+            return req.CreateResponse(HttpStatusCode.OK, html.ToString(), "text/html");
         }
 
         /// <summary>

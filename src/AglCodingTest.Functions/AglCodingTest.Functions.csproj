@@ -53,6 +53,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AglCodingTestHttpTriggerFunction.cs" />
+    <Compile Include="FunctionOptions\AglCodingTestHttpTriggerFunctionOptions.cs" />
+    <Compile Include="FunctionOptions\FunctionOptionsBase.cs" />
     <Compile Include="IAglCodingTestHttpTriggerFunction.cs" />
     <Compile Include="IFunction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

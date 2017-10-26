@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-using AglCodingTest.Services.ServiceOptions;
+using AglCodingTest.Functions.FunctionOptions;
 
 namespace AglCodingTest.Functions
 {
@@ -13,12 +13,12 @@ namespace AglCodingTest.Functions
         /// <summary>
         /// Invokes the function.
         /// </summary>
-        /// <typeparam name="TIn">Type of input instance.</typeparam>
-        /// <typeparam name="TOptions">Type of service options instance.</typeparam>
+        /// <typeparam name="TInput">Type of input instance.</typeparam>
+        /// <typeparam name="TOptions">Type of function options instance.</typeparam>
         /// <param name="input"><see cref="TIn"/> instance.</param>
         /// <param name="options"><see cref="TOptions"/> instance.</param>
-        /// <returns>Returns <see cref="TOut"/> instance.</returns>
-        Task<object> InvokeAsync<TIn, TOptions>(TIn input, TOptions options)
-            where TOptions : ServiceOptionsBase;
+        /// <returns>Returns output instance.</returns>
+        Task<object> InvokeAsync<TInput, TOptions>(TInput input, TOptions options = default(TOptions))
+            where TOptions : FunctionOptionsBase;
     }
 }
