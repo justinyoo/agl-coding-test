@@ -39,12 +39,13 @@ namespace AglCodingTest.Models.Tests
         {
             var pet = this._fixture.Build<Person>()
                                    .With(p => p.GenderType, genderType)
+                                   .Without(p => p.Pets)
                                    .Create();
-
 
             var serialised = JsonConvert.SerializeObject(pet, this._settings);
 
             serialised.Should().ContainEquivalentOf(genderType.ToString());
+            serialised.Should().ContainEquivalentOf("[]");
         }
     }
 }
