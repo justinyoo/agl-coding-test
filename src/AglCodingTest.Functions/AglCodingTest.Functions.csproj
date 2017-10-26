@@ -34,6 +34,9 @@
     <PackageReference Include="Legacy2CPSWorkaround" Version="1.0.0">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core">
+      <Version>5.2.3</Version>
+    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>9.0.1</Version>
     </PackageReference>
@@ -49,8 +52,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AglCodingTestHttpTriggerFunction.cs" />
+    <Compile Include="IAglCodingTestHttpTriggerFunction.cs" />
+    <Compile Include="IFunction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AglCodingTest.Extensions\AglCodingTest.Extensions.csproj">
+      <Project>{b6bb1c52-6b75-4316-b50b-9a6a160b2252}</Project>
+      <Name>AglCodingTest.Extensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AglCodingTest.Models\AglCodingTest.Models.csproj">
+      <Project>{c7d5bbb5-482d-49f6-9e0e-9f33f95a64cd}</Project>
+      <Name>AglCodingTest.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AglCodingTest.Services\AglCodingTest.Services.csproj">
+      <Project>{2d1b8fd2-f4f5-4354-80fb-569d3491d78b}</Project>
+      <Name>AglCodingTest.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AglCodingTest.Settings\AglCodingTest.Settings.csproj">
+      <Project>{074176de-e0ed-455c-814b-c96c5c3e85df}</Project>
+      <Name>AglCodingTest.Settings</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
