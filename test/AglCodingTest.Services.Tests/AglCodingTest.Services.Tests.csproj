@@ -69,7 +69,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AglPayloadLoadingServiceTests.cs" />
+    <Compile Include="Fixtures\FooServiceOptions.cs" />
     <Compile Include="Fixtures\ServiceFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -77,6 +78,10 @@
     <ProjectReference Include="..\..\src\AglCodingTest.Services\AglCodingTest.Services.csproj">
       <Project>{2d1b8fd2-f4f5-4354-80fb-569d3491d78b}</Project>
       <Name>AglCodingTest.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\AglCodingTest.Settings\AglCodingTest.Settings.csproj">
+      <Project>{074176de-e0ed-455c-814b-c96c5c3e85df}</Project>
+      <Name>AglCodingTest.Settings</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
