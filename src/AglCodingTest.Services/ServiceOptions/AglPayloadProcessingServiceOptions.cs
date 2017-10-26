@@ -24,6 +24,11 @@ namespace AglCodingTest.Services.ServiceOptions
         public List<Person> People { get; set; }
 
         /// <summary>
+        /// Gets or sets the <see cref="Models.PetType"/> value.
+        /// </summary>
+        public PetType PetType { get; set; }
+
+        /// <summary>
         /// Gets or sets the collection of group of pets.
         /// </summary>
         public List<string> Groups { get; set; }

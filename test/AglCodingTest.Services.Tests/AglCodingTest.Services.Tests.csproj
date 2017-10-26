@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AglPayloadLoadingServiceTests.cs" />
+    <Compile Include="AglPayloadProcessingServiceTests.cs" />
     <Compile Include="Fixtures\FooServiceOptions.cs" />
     <Compile Include="Fixtures\ServiceFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

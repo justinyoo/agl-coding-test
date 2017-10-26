@@ -24,13 +24,13 @@ namespace AglCodingTest.Services
             serviceOptions.ThrowIfNullOrDefault();
 
             var groups = serviceOptions.People
-                                       .Where(p => p.Pets.Any(q => q.PetType == PetType.Cat))
+                                       .Where(p => p.Pets.Any(q => q.PetType == serviceOptions.PetType))
                                        .OrderBy(p => p.GenderType)
                                        .Select(p => new
                                                         {
                                                             Gender = p.GenderType,
                                                             Names = p.Pets
-                                                                     .Where(q => q.PetType == PetType.Cat)
+                                                                     .Where(q => q.PetType == serviceOptions.PetType)
                                                                      .OrderBy(q => q.Name)
                                                                      .Select(q => q.Name)
                                                         })
