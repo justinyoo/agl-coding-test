@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2D1B8FD2-F4F5-4354-80FB-569D3491D78B}</ProjectGuid>
+    <ProjectGuid>{9BB791C9-FC8A-47F9-817F-D15ACB5621A5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AglCodingTest.Services</RootNamespace>
-    <AssemblyName>AglCodingTest.Services</AssemblyName>
+    <RootNamespace>AglCodingTest.Services.Tests</RootNamespace>
+    <AssemblyName>AglCodingTest.Services.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,14 +30,35 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="AutoFixture">
+      <Version>3.51.0</Version>
+    </PackageReference>
+    <PackageReference Include="AutoFixture.AutoMoq">
+      <Version>3.51.0</Version>
+    </PackageReference>
+    <PackageReference Include="AutoFixture.Xunit2">
+      <Version>3.51.0</Version>
+    </PackageReference>
+    <PackageReference Include="FluentAssertions">
+      <Version>4.19.4</Version>
+    </PackageReference>
     <PackageReference Include="Legacy2CPSWorkaround" Version="1.0.0">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.AspNet.WebApi.Core">
-      <Version>5.2.3</Version>
+    <PackageReference Include="Moq">
+      <Version>4.7.142</Version>
     </PackageReference>
-    <PackageReference Include="Newtonsoft.Json">
-      <Version>9.0.1</Version>
+    <PackageReference Include="WorldDomination.HttpClient.Helpers">
+      <Version>6.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="xunit">
+      <Version>2.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="xunit.runner.console">
+      <Version>2.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="xunit.runner.visualstudio">
+      <Version>2.3.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -53,26 +73,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AglPayloadLoadingService.cs" />
-    <Compile Include="IAglPayloadLoadingService.cs" />
-    <Compile Include="IService.cs" />
+    <Compile Include="AglPayloadLoadingServiceTests.cs" />
+    <Compile Include="Fixtures\FooServiceOptions.cs" />
+    <Compile Include="Fixtures\ServiceFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceOptions\AglPayloadLoadingServiceOptions.cs" />
-    <Compile Include="ServiceOptions\ServiceOptionsBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AglCodingTest.Extensions\AglCodingTest.Extensions.csproj">
-      <Project>{b6bb1c52-6b75-4316-b50b-9a6a160b2252}</Project>
-      <Name>AglCodingTest.Extensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AglCodingTest.Models\AglCodingTest.Models.csproj">
+    <ProjectReference Include="..\..\src\AglCodingTest.Models\AglCodingTest.Models.csproj">
       <Project>{c7d5bbb5-482d-49f6-9e0e-9f33f95a64cd}</Project>
       <Name>AglCodingTest.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AglCodingTest.Settings\AglCodingTest.Settings.csproj">
+    <ProjectReference Include="..\..\src\AglCodingTest.Services\AglCodingTest.Services.csproj">
+      <Project>{2d1b8fd2-f4f5-4354-80fb-569d3491d78b}</Project>
+      <Name>AglCodingTest.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\AglCodingTest.Settings\AglCodingTest.Settings.csproj">
       <Project>{074176de-e0ed-455c-814b-c96c5c3e85df}</Project>
       <Name>AglCodingTest.Settings</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

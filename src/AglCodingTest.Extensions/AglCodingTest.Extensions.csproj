@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2D1B8FD2-F4F5-4354-80FB-569D3491D78B}</ProjectGuid>
+    <ProjectGuid>{B6BB1C52-6B75-4316-B50B-9A6A160B2252}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AglCodingTest.Services</RootNamespace>
-    <AssemblyName>AglCodingTest.Services</AssemblyName>
+    <RootNamespace>AglCodingTest.Extensions</RootNamespace>
+    <AssemblyName>AglCodingTest.Extensions</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,17 +33,10 @@
     <PackageReference Include="Legacy2CPSWorkaround" Version="1.0.0">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.AspNet.WebApi.Core">
-      <Version>5.2.3</Version>
-    </PackageReference>
-    <PackageReference Include="Newtonsoft.Json">
-      <Version>9.0.1</Version>
-    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,26 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AglPayloadLoadingService.cs" />
-    <Compile Include="IAglPayloadLoadingService.cs" />
-    <Compile Include="IService.cs" />
+    <Compile Include="GenericExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceOptions\AglPayloadLoadingServiceOptions.cs" />
-    <Compile Include="ServiceOptions\ServiceOptionsBase.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AglCodingTest.Extensions\AglCodingTest.Extensions.csproj">
-      <Project>{b6bb1c52-6b75-4316-b50b-9a6a160b2252}</Project>
-      <Name>AglCodingTest.Extensions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AglCodingTest.Models\AglCodingTest.Models.csproj">
-      <Project>{c7d5bbb5-482d-49f6-9e0e-9f33f95a64cd}</Project>
-      <Name>AglCodingTest.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AglCodingTest.Settings\AglCodingTest.Settings.csproj">
-      <Project>{074176de-e0ed-455c-814b-c96c5c3e85df}</Project>
-      <Name>AglCodingTest.Settings</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
