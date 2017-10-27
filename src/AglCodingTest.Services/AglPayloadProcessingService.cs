@@ -25,12 +25,23 @@ namespace AglCodingTest.Services
 
             var groups = serviceOptions.People
                                        .Where(p => p.Pets.Any(q => q.PetType == serviceOptions.PetType))
+                                       .Select(p => new
+                                                        {
+                                                            GenderType = p.GenderType,
+                                                            Pets = p.Pets.Where(q => q.PetType == serviceOptions.PetType)
+                                                        })
+                                       .GroupBy(p => p.GenderType,
+                                                p => p.Pets,
+                                                (key, group) => new
+                                                                    {
+                                                                        GenderType = key,
+                                                                        Pets = group.SelectMany(q => q)
+                                                                    })
                                        .OrderBy(p => p.GenderType)
                                        .Select(p => new
                                                         {
                                                             Gender = p.GenderType,
                                                             Names = p.Pets
-                                                                     .Where(q => q.PetType == serviceOptions.PetType)
                                                                      .OrderBy(q => q.Name)
                                                                      .Select(q => q.Name)
                                                         })

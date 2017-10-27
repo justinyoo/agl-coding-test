@@ -45,6 +45,8 @@ namespace AglCodingTest.Models.Tests
             var serialised = JsonConvert.SerializeObject(pet, this._settings);
 
             serialised.Should().ContainEquivalentOf(petType.ToString());
+            serialised.Should().NotContainEquivalentOf("petType");
+            serialised.Should().ContainEquivalentOf("\"type\":");
         }
     }
 }

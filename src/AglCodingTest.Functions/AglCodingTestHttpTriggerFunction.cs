@@ -80,7 +80,10 @@ namespace AglCodingTest.Functions
             html.AppendLine(string.Join(string.Empty, this._processingServiceOptions.Groups));
             html.AppendLine("</body></html>");
 
-            return req.CreateResponse(HttpStatusCode.OK, html.ToString(), new HtmlMediaTypeViewFormatter());
+            var content = new StringContent(html.ToString(), Encoding.UTF8, "text/html");
+            var res = new HttpResponseMessage(HttpStatusCode.OK) { Content = content };
+
+            return res;
         }
 
         /// <summary>

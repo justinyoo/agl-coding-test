@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+using Newtonsoft.Json;
+
 namespace AglCodingTest.Models
 {
     /// <summary>
@@ -15,6 +17,7 @@ namespace AglCodingTest.Models
         /// <summary>
         /// Gets or sets the <see cref="Models.PetType"/> value.
         /// </summary>
+        [JsonProperty("type")]
         [EnumDataType(typeof(PetType))]
         public PetType PetType { get; set; }
     }
