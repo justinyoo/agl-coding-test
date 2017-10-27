@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using AglCodingTest.Extensions;
+using AglCodingTest.Functions.Formatters;
 using AglCodingTest.Functions.FunctionOptions;
 using AglCodingTest.Services;
 using AglCodingTest.Services.ServiceOptions;
@@ -17,6 +18,9 @@ namespace AglCodingTest.Functions
     {
         private readonly IAglPayloadLoadingService _loadingService;
         private readonly IAglPayloadProcessingService _processingService;
+
+        private AglPayloadLoadingServiceOptions _loadingServiceOptions;
+        private AglPayloadProcessingServiceOptions _processingServiceOptions;
 
         private bool _disposed;
 
@@ -35,6 +39,8 @@ namespace AglCodingTest.Functions
         public async Task<object> InvokeAsync<TInput, TOptions>(TInput input, TOptions options = default(TOptions))
             where TOptions : FunctionOptionsBase
         {
+            input.ThrowIfNullOrDefault();
+
             var req = input as HttpRequestMessage;
             req.ThrowIfNullOrDefault();
 
@@ -44,25 +50,25 @@ namespace AglCodingTest.Functions
             functionOptions.ThrowIfNullOrDefault();
 
             // STEP #1: Load payload.
-            var loadingServiceOptions = new AglPayloadLoadingServiceOptions();
+            this._loadingServiceOptions = new AglPayloadLoadingServiceOptions();
 
-            await this._loadingService.InvokeAsync(loadingServiceOptions).ConfigureAwait(false);
+            await this._loadingService.InvokeAsync(this._loadingServiceOptions).ConfigureAwait(false);
 
-            if (!loadingServiceOptions.IsInvoked)
+            if (!this._loadingServiceOptions.IsInvoked)
             {
                 return req.CreateErrorResponse(HttpStatusCode.InternalServerError, "Payload couldn't be loaded");
             }
 
             // STEP #2: Process payload.
-            var processingServiceOptions = new AglPayloadProcessingServiceOptions()
-                                               {
-                                                   People = loadingServiceOptions.People,
-                                                   PetType = functionOptions.PetType
-                                               };
+            this._processingServiceOptions = new AglPayloadProcessingServiceOptions()
+                                                 {
+                                                     People = this._loadingServiceOptions.People,
+                                                     PetType = functionOptions.PetType
+                                                 };
 
-            await this._processingService.InvokeAsync(processingServiceOptions).ConfigureAwait(false);
+            await this._processingService.InvokeAsync(this._processingServiceOptions).ConfigureAwait(false);
 
-            if (!processingServiceOptions.IsInvoked)
+            if (!this._processingServiceOptions.IsInvoked)
             {
                 return req.CreateErrorResponse(HttpStatusCode.InternalServerError, "Payload couldn't be processed");
             }
@@ -70,10 +76,10 @@ namespace AglCodingTest.Functions
             // STEP #3: Create response.
             var html = new StringBuilder();
             html.AppendLine("<html><body>");
-            html.AppendLine(string.Join(string.Empty, processingServiceOptions.Groups));
+            html.AppendLine(string.Join(string.Empty, this._processingServiceOptions.Groups));
             html.AppendLine("</body></html>");
 
-            return req.CreateResponse(HttpStatusCode.OK, html.ToString(), "text/html");
+            return req.CreateResponse(HttpStatusCode.OK, html.ToString(), new HtmlMediaTypeFormatter());
         }
 
         /// <summary>
