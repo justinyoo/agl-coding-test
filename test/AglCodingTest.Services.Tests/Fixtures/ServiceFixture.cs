@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Text;
 
+using AglCodingTest.Models;
 using AglCodingTest.Settings;
 
 using Moq;
@@ -85,6 +88,17 @@ namespace AglCodingTest.Services.Tests.Fixtures
             var client = new HttpClient(handler);
 
             return client;
+        }
+
+        /// <summary>
+        /// Arranges the list of <see cref="Person"/> entities.
+        /// </summary>
+        /// <returns>Returns the list of <see cref="Person"/> entities.</returns>
+        public List<Person> ArrangePeople()
+        {
+            var people = this.Fixture.CreateMany<Person>().ToList();
+
+            return people;
         }
 
         /// <summary>
