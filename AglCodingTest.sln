@@ -42,6 +42,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AglCodingTest.Dependencies"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AglCodingTest.FunctionApp.Tests", "src\AglCodingTest.FunctionApp.Tests\AglCodingTest.FunctionApp.Tests.csproj", "{CF5D7FD5-F2DF-45AB-A277-27BA4063F5D8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AglCodingTest.Dependencies.Tests", "test\AglCodingTest.Dependencies.Tests\AglCodingTest.Dependencies.Tests.csproj", "{AC8F3F12-CA71-4EDF-A804-259A35EE83A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,6 +102,10 @@ Global
 		{CF5D7FD5-F2DF-45AB-A277-27BA4063F5D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF5D7FD5-F2DF-45AB-A277-27BA4063F5D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF5D7FD5-F2DF-45AB-A277-27BA4063F5D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC8F3F12-CA71-4EDF-A804-259A35EE83A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC8F3F12-CA71-4EDF-A804-259A35EE83A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC8F3F12-CA71-4EDF-A804-259A35EE83A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC8F3F12-CA71-4EDF-A804-259A35EE83A3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -118,6 +124,7 @@ Global
 		{1CAF0093-DD43-45FB-9E21-CF7147A4F49E} = {DFC84156-3B71-474C-A6AD-91D119C04EAF}
 		{5FDA155B-AC98-461A-9FD7-EE2BC3B9A6B8} = {74F77911-DFA1-428E-9C09-71334FD246A4}
 		{CF5D7FD5-F2DF-45AB-A277-27BA4063F5D8} = {DFC84156-3B71-474C-A6AD-91D119C04EAF}
+		{AC8F3F12-CA71-4EDF-A804-259A35EE83A3} = {DFC84156-3B71-474C-A6AD-91D119C04EAF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {938129C8-CBE0-4346-B677-9B44A7D7A0D9}

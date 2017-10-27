@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5FDA155B-AC98-461A-9FD7-EE2BC3B9A6B8}</ProjectGuid>
+    <ProjectGuid>{AC8F3F12-CA71-4EDF-A804-259A35EE83A3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AglCodingTest.Dependencies</RootNamespace>
-    <AssemblyName>AglCodingTest.Dependencies</AssemblyName>
+    <RootNamespace>AglCodingTest.Dependencies.Tests</RootNamespace>
+    <AssemblyName>AglCodingTest.Dependencies.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,11 +33,35 @@
     <PackageReference Include="Autofac">
       <Version>4.6.2</Version>
     </PackageReference>
+    <PackageReference Include="AutoFixture">
+      <Version>3.51.0</Version>
+    </PackageReference>
+    <PackageReference Include="AutoFixture.AutoMoq">
+      <Version>3.51.0</Version>
+    </PackageReference>
+    <PackageReference Include="AutoFixture.Xunit2">
+      <Version>3.51.0</Version>
+    </PackageReference>
+    <PackageReference Include="FluentAssertions">
+      <Version>4.19.4</Version>
+    </PackageReference>
     <PackageReference Include="Legacy2CPSWorkaround" Version="1.0.0">
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Azure.WebJobs">
-      <Version>2.1.0-beta4</Version>
+    <PackageReference Include="Moq">
+      <Version>4.7.142</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>9.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="xunit">
+      <Version>2.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="xunit.runner.console">
+      <Version>2.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="xunit.runner.visualstudio">
+      <Version>2.3.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -51,27 +75,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppModule.cs" />
-    <Compile Include="ContainerBuilderExtensions.cs" />
-    <Compile Include="FunctionFactory.cs" />
-    <Compile Include="IFunctionFactory.cs" />
+    <Compile Include="AppModuleTests.cs" />
+    <Compile Include="Fixtures\DependencyFixture.cs" />
+    <Compile Include="Fixtures\FooFunction.cs" />
+    <Compile Include="FunctionFactoryTests.cs" />
+    <Compile Include="Fixtures\IFooFunction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegistrationHandler.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AglCodingTest.Extensions\AglCodingTest.Extensions.csproj">
-      <Project>{b6bb1c52-6b75-4316-b50b-9a6a160b2252}</Project>
-      <Name>AglCodingTest.Extensions</Name>
+    <ProjectReference Include="..\..\src\AglCodingTest.Dependencies\AglCodingTest.Dependencies.csproj">
+      <Project>{5fda155b-ac98-461a-9fd7-ee2bc3b9a6b8}</Project>
+      <Name>AglCodingTest.Dependencies</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AglCodingTest.Functions\AglCodingTest.Functions.csproj">
+    <ProjectReference Include="..\..\src\AglCodingTest.Functions\AglCodingTest.Functions.csproj">
       <Project>{974e7b3f-80de-486c-8968-27219d2f079f}</Project>
       <Name>AglCodingTest.Functions</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AglCodingTest.Services\AglCodingTest.Services.csproj">
-      <Project>{2d1b8fd2-f4f5-4354-80fb-569d3491d78b}</Project>
-      <Name>AglCodingTest.Services</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AglCodingTest.Settings\AglCodingTest.Settings.csproj">
+    <ProjectReference Include="..\..\src\AglCodingTest.Settings\AglCodingTest.Settings.csproj">
       <Project>{074176de-e0ed-455c-814b-c96c5c3e85df}</Project>
       <Name>AglCodingTest.Settings</Name>
     </ProjectReference>
