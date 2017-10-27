@@ -3,11 +3,10 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
+using AglCodingTest.Dependencies;
 using AglCodingTest.Functions;
 using AglCodingTest.Functions.FunctionOptions;
 using AglCodingTest.Models;
-using AglCodingTest.Services;
-using AglCodingTest.Settings;
 
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
@@ -21,6 +20,11 @@ namespace AglCodingTest.FunctionApp
     public static class IndexHttpTrigger
     {
         /// <summary>
+        /// Gets or sets the <see cref="Dependencies.FunctionFactory"/> instance.
+        /// </summary>
+        public static IFunctionFactory FunctionFactory { get; set; } = new FunctionFactory();
+
+        /// <summary>
         /// Runs the function.
         /// </summary>
         /// <param name="req"><see cref="HttpRequestMessage"/> instance.</param>
@@ -29,12 +33,16 @@ namespace AglCodingTest.FunctionApp
         [FunctionName("IndexHttpTrigger")]
         public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = "pets")]HttpRequestMessage req, TraceWriter log)
         {
-            var appSettings = new AppSettings();
-            var httpClient = new HttpClient();
-            var loadingService = new AglPayloadLoadingService(appSettings, httpClient);
-            var processingService = new AglPayloadProcessingService();
-            var function = new AglCodingTestHttpTriggerFunction(loadingService, processingService);
+            var options = GetOptions(req);
+            var res = await FunctionFactory.Create<IAglCodingTestHttpTriggerFunction>(log)
+                                           .InvokeAsync(req, options)
+                                           .ConfigureAwait(false);
 
+            return res as HttpResponseMessage;
+        }
+
+        private static AglCodingTestHttpTriggerFunctionOptions GetOptions(HttpRequestMessage req)
+        {
             var pet = req.GetQueryNameValuePairs()
                          .SingleOrDefault(p => p.Key.Equals("type", StringComparison.CurrentCultureIgnoreCase))
                          .Value;
@@ -44,9 +52,7 @@ namespace AglCodingTest.FunctionApp
 
             var options = new AglCodingTestHttpTriggerFunctionOptions() { PetType = petType };
 
-            var result = await function.InvokeAsync(req, options).ConfigureAwait(false);
-
-            return result as HttpResponseMessage;
+            return options;
         }
     }
 }

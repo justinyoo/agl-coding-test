@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 
 using AglCodingTest.Functions.FunctionOptions;
 
+using Microsoft.Azure.WebJobs.Host;
+
 namespace AglCodingTest.Functions
 {
     /// <summary>
@@ -10,6 +12,11 @@ namespace AglCodingTest.Functions
     /// </summary>
     public interface IFunction : IDisposable
     {
+        /// <summary>
+        /// Gets or sets the <see cref="TraceWriter"/> instance.
+        /// </summary>
+        TraceWriter Log { get; set; }
+
         /// <summary>
         /// Invokes the function.
         /// </summary>
