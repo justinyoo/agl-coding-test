@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -33,12 +34,28 @@ namespace AglCodingTest.FunctionApp
         [FunctionName("IndexHttpTrigger")]
         public static async Task<HttpResponseMessage> Run([HttpTrigger(AuthorizationLevel.Function, "get", Route = "pets")]HttpRequestMessage req, TraceWriter log)
         {
-            var options = GetOptions(req);
-            var res = await FunctionFactory.Create<IAglCodingTestHttpTriggerFunction>(log)
-                                           .InvokeAsync(req, options)
-                                           .ConfigureAwait(false);
+            AglCodingTestHttpTriggerFunctionOptions options;
+            try
+            {
+                options = GetOptions(req);
+            }
+            catch (Exception ex)
+            {
+                return req.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
 
-            return res as HttpResponseMessage;
+            try
+            {
+                var res = await FunctionFactory.Create<IAglCodingTestHttpTriggerFunction>(log)
+                                               .InvokeAsync(req, options)
+                                               .ConfigureAwait(false);
+
+                return res as HttpResponseMessage;
+            }
+            catch (Exception ex)
+            {
+                return req.CreateErrorResponse(HttpStatusCode.InternalServerError, ex);
+            }
         }
 
         private static AglCodingTestHttpTriggerFunctionOptions GetOptions(HttpRequestMessage req)
