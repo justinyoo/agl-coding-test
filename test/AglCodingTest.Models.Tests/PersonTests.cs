@@ -45,7 +45,9 @@ namespace AglCodingTest.Models.Tests
             var serialised = JsonConvert.SerializeObject(pet, this._settings);
 
             serialised.Should().ContainEquivalentOf(genderType.ToString());
-            serialised.Should().ContainEquivalentOf("[]");
+            serialised.Should().NotContainEquivalentOf("genderType");
+            serialised.Should().ContainEquivalentOf("\"gender\":");
+            serialised.Should().ContainEquivalentOf("\"pets\": []");
         }
     }
 }

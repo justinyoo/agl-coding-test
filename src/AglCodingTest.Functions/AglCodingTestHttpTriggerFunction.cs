@@ -8,22 +8,18 @@ using AglCodingTest.Functions.FunctionOptions;
 using AglCodingTest.Services;
 using AglCodingTest.Services.ServiceOptions;
 
-using WebApiContrib.Formatting.Html.Formatting;
-
 namespace AglCodingTest.Functions
 {
     /// <summary>
     /// This represents the function entity to process for AGL coding test.
     /// </summary>
-    public class AglCodingTestHttpTriggerFunction : IAglCodingTestHttpTriggerFunction
+    public class AglCodingTestHttpTriggerFunction : FunctionBase, IAglCodingTestHttpTriggerFunction
     {
         private readonly IAglPayloadLoadingService _loadingService;
         private readonly IAglPayloadProcessingService _processingService;
 
         private AglPayloadLoadingServiceOptions _loadingServiceOptions;
         private AglPayloadProcessingServiceOptions _processingServiceOptions;
-
-        private bool _disposed;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AglCodingTestHttpTriggerFunction"/> class.
@@ -37,8 +33,7 @@ namespace AglCodingTest.Functions
         }
 
         /// <inheritdoc />
-        public async Task<object> InvokeAsync<TInput, TOptions>(TInput input, TOptions options = default(TOptions))
-            where TOptions : FunctionOptionsBase
+        public override async Task<object> InvokeAsync<TInput, TOptions>(TInput input, TOptions options = default(TOptions))
         {
             input.ThrowIfNullOrDefault();
 
@@ -80,20 +75,10 @@ namespace AglCodingTest.Functions
             html.AppendLine(string.Join(string.Empty, this._processingServiceOptions.Groups));
             html.AppendLine("</body></html>");
 
-            return req.CreateResponse(HttpStatusCode.OK, html.ToString(), new HtmlMediaTypeViewFormatter());
-        }
+            var content = new StringContent(html.ToString(), Encoding.UTF8, "text/html");
+            var res = new HttpResponseMessage(HttpStatusCode.OK) { Content = content };
 
-        /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        public void Dispose()
-        {
-            if (this._disposed)
-            {
-                return;
-            }
-
-            this._disposed = true;
+            return res;
         }
     }
 }

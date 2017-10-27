@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
+using Newtonsoft.Json;
+
 namespace AglCodingTest.Models
 {
     /// <summary>
@@ -24,6 +26,7 @@ namespace AglCodingTest.Models
         /// <summary>
         /// Gets or sets the <see cref="Models.GenderType"/> value.
         /// </summary>
+        [JsonProperty("gender")]
         [EnumDataType(typeof(GenderType))]
         public GenderType GenderType { get; set; }
 
