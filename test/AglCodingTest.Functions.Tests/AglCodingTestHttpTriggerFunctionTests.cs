@@ -1,19 +1,12 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Formatting;
 using System.Reflection;
 using System.Threading.Tasks;
-using System.Web;
-using System.Web.Configuration;
-using System.Web.Http;
-using System.Web.Http.Controllers;
-using System.Web.Http.Hosting;
 
 using AglCodingTest.Functions.FunctionOptions;
 using AglCodingTest.Functions.Tests.Fixtures;
 using AglCodingTest.Models;
-using AglCodingTest.Services;
 using AglCodingTest.Services.ServiceOptions;
 
 using FluentAssertions;

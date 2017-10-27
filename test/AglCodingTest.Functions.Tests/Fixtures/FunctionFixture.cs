@@ -6,7 +6,6 @@ using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Hosting;
 
-using AglCodingTest.Functions.Formatters;
 using AglCodingTest.Functions.FunctionOptions;
 using AglCodingTest.Models;
 using AglCodingTest.Services;

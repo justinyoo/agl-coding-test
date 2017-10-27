@@ -4,10 +4,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 using AglCodingTest.Extensions;
-using AglCodingTest.Functions.Formatters;
 using AglCodingTest.Functions.FunctionOptions;
 using AglCodingTest.Services;
 using AglCodingTest.Services.ServiceOptions;
+
+using WebApiContrib.Formatting.Html.Formatting;
 
 namespace AglCodingTest.Functions
 {
@@ -79,7 +80,7 @@ namespace AglCodingTest.Functions
             html.AppendLine(string.Join(string.Empty, this._processingServiceOptions.Groups));
             html.AppendLine("</body></html>");
 
-            return req.CreateResponse(HttpStatusCode.OK, html.ToString(), new HtmlMediaTypeFormatter());
+            return req.CreateResponse(HttpStatusCode.OK, html.ToString(), new HtmlMediaTypeViewFormatter());
         }
 
         /// <summary>
