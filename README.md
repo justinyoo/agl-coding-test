@@ -17,7 +17,22 @@ Based on the instruction on [http://agl-developer-test.azurewebsites.net/](http:
 
 ## Prerequisites ##
 
-This application is written by Visual Studio Enterprise 2017 (v15.4.1). VS 2017 Community Edition is also fine to run the code.
+* [Visual Studio 2017 (v15.4.1)](https://www.visualstudio.com/)
+* [Azure Storage Emulator v5.2](https://docs.microsoft.com/en-au/azure/storage/common/storage-use-emulator)
+
+For your local debugging purpose, the `local.settings.json` should exist. If it doesn't, create one. The bare minimum content of it should look like:
+
+```csharp
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "AzureWebJobsDashboard": "UseDevelopmentStorage=true",
+
+    "Agl.Endpoint": "http://agl-developer-test.azurewebsites.net/people.json"
+  }
+}
+```
 
 
 ## Implementation ##
