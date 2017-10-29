@@ -15,16 +15,23 @@ Based on the instruction on [http://agl-developer-test.azurewebsites.net/](http:
 * Use LINQ for grouping and sorting the data source.
 
 
+## Prerequisites ##
+
+This application is written by Visual Studio Enterprise 2017 (v15.4.1). VS 2017 Community Edition is also fine to run the code.
+
+
 ## Implementation ##
 
 In order to satisfy the requirements, I used the **serverless** architecture &ndash; Azure Functions, because:
 
 * It doesn't need to setup an application environment,
-* It only focuses on the code itself, which is basically business logic,
+* It only focuses on the code itself, which is basically business logic, and
 * It's easy to build
 
+The application consists of number of small libraries that only take care of one responsibility respectively &ndash; settings, models, services, functions and IoC. Also each project has its corresponding test projects for unit testing.
 
-## Result ##
+
+## Reproduction ##
 
 The application can be run on either local machine or Azure Functions instance on Azure. In order to run this application, use Visual Studio or Azure Function Tooling npm package. If Visual Studio is chosen, follow the steps below:
 
@@ -34,7 +41,7 @@ The application can be run on either local machine or Azure Functions instance o
 * Press F5 key to run the Azure Function instance locally.
 * Open a web browser and type `http://localhost:7071/pets` to run the Azure Functions application.
 * The required result will be displayed.
-* If a querystring parameter, `type` can be used to specify the pet type. Currently, the `type` parameter only considers three values &ndash; `Dog`, `Cat` and `Fish`
+* A querystring parameter, `type` can be used to specify the pet type. Currently, the `type` parameter only considers three values &ndash; `Dog`, `Cat` and `Fish`
 
 Valid requests are:
 
