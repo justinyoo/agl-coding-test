@@ -17,8 +17,8 @@ Based on the instruction on [http://agl-developer-test.azurewebsites.net/](http:
 
 ## Prerequisites ##
 
-* [Visual Studio 2017 (v15.4.1)](https://www.visualstudio.com/)
-* [Azure Storage Emulator v5.2](https://docs.microsoft.com/en-au/azure/storage/common/storage-use-emulator)
+* [Visual Studio 2017 (v15.4.1)](https://www.visualstudio.com/?WT.mc_id=aglcodingtest-github-juyoo)
+* [Azure Storage Emulator v5.2](https://docs.microsoft.com/azure/storage/common/storage-use-emulator?WT.mc_id=aglcodingtest-github-juyoo)
 
 For your local debugging purpose, the `local.settings.json` should exist. If it doesn't, create one. The bare minimum content of it should look like:
 
